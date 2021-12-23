@@ -23,9 +23,52 @@ input {
     margin-top: 3em;
 }
 
-#list div { 
+.book { 
     background-color: blueviolet;
     width: 80%;
-    height: 8em;
+    height: auto;
     margin: 1px;
+    display: flex;
+    justify-content: space-between;
 }
+
+.bookInfo { 
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.bookButtons { 
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    justify-content: center;
+}
+
+.bookButtons button { 
+    margin: 1em;
+}
+
+
+#creator { 
+    color: cornsilk;
+    font-size: 18px;
+    display: none;
+    width: 40%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: brown solid 3px;
+    background-color: coral;
+}
+
+#creator input { 
+    margin: 1em 0 1em 0; 
+    width: 90%;
+}
+
+#Description { 
+    height:200px;
+    font-size:14pt;
+}
+

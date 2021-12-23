@@ -10,14 +10,47 @@
     <body>
         <div id='container'>
 
-         <input></input>
-
+         <input> 
          <button id='add'>Add a book</button>
+         
 
          <div id='list'>
-            <div class='book'></div> 
-            <div class='book'></div>
-            <div class='book'></div>
+
+            <div id='creator'>
+              <label for='Name'>Name:</label>
+              <input type="text" placeholder="Enter the name of the Book" id='Name'>
+
+              <label for='Author'>Author:</label>
+              <input type="text" placeholder="Enter the Author of the Book" id='Author'>
+
+              <label for='Description'>Description:</label>
+              <textarea name="Text1" placeholder="Put some descripiton here if it's needed" cols="40" rows="4" id='Description' style="font-size: medium; width: 90%;"></textarea>
+
+              <label for='Pages'>Pages:</label>
+              <input type="text" placeholder="How much pages?" id='Pages'>
+
+              <label for='Year'>Year of publicing:</label>
+              <input type="text" placeholder="When the book came out?" id='Year'>
+
+              <button id='newBook'>New book</button>
+            </div>
+
+            <div class='book' style="display: none;">
+
+                <div class='bookInfo'> 
+                <h1>TheName, byAuthor</h1>
+                <p>Discription, goes blah blah blah blah blah blah blah blah blah</p>
+                <p>yearOfPublishing</p>
+                <p>Pages</p>
+                </div>
+
+               <div class='bookButtons'>
+                   <button id='delete'>Delete</button>
+                   <button>Read</button>
+               </div> 
+
+            </div> 
+       
          </div>
 
         </div>

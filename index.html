@@ -8,9 +8,20 @@
     </head>
 
     <body>
+        <header>
+         <div> 
+            <h1 id='bookCount'>0</h1>
+            <label for="bookCount">Books added:</label>
+          </div>
+         <div>
+            <h1 id='readCount'>0</h1>
+            <label for="readCount">Books read:</label>
+         <div>
+        </header>
+
         <div id='container'>
 
-         <input> 
+         <input id='filter' placeholder="Filter your books"> 
          <button id='add'>Add a book</button>
          
 
@@ -35,21 +46,9 @@
               <button id='newBook'>New book</button>
             </div>
 
-            <div class='book' style="display: none;">
+             <div id='books'>  </div> 
 
-                <div class='bookInfo'> 
-                <h1>TheName, byAuthor</h1>
-                <p>Discription, goes blah blah blah blah blah blah blah blah blah</p>
-                <p>yearOfPublishing</p>
-                <p>Pages</p>
-                </div>
-
-               <div class='bookButtons'>
-                   <button id='delete'>Delete</button>
-                   <button>Read</button>
-               </div> 
-
-            </div> 
+         </div>
        
          </div>
 

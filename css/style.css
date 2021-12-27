@@ -6,13 +6,48 @@ body {
     width: 100%;
     height: 100%;
     text-align: center;
-    padding: 10em;
+    padding: 0.5em 5em;
+    background-color: rgb(238, 238, 238);
 }       
+
+header { 
+    display: flex;
+    justify-content: center;
+    margin: 1em;
+    margin-bottom: 5em;
+}
+
+header div { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+header h1 { 
+    font-size: 150px;
+    margin: 0 150px;
+}
+#container { 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 input { 
     width: 60%;
     height: 2em;
+    border: solid 2px rgb(74, 158, 255);
+}
 
+#add { 
+    margin-top: 1em;
+    background-color: transparent;
+    border: rgb(0, 119, 255) solid 2px;
+    color: rgb(0, 119, 255);
+    font-size: 18px;
+    border-radius: 10px;
 }
 
 #list { 
@@ -21,15 +56,7 @@ input {
     flex-direction: column;
     align-items: center;
     margin-top: 3em;
-}
-
-.book { 
-    background-color: blueviolet;
-    width: 80%;
-    height: auto;
-    margin: 1px;
-    display: flex;
-    justify-content: space-between;
+    width: 100%;
 }
 
 .bookInfo { 
@@ -40,26 +67,29 @@ input {
 
 .bookButtons { 
     display: flex;
-    flex-direction: column;
-    align-items:flex-end;
+    flex-direction: row;
+    align-items: center;
     justify-content: center;
 }
 
 .bookButtons button { 
     margin: 1em;
+    margin-bottom: 1.5em;
 }
 
 
 #creator { 
-    color: cornsilk;
+    color: rgb(25, 0, 252);
     font-size: 18px;
+    font-weight: bold;
     display: none;
     width: 40%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: brown solid 3px;
-    background-color: coral;
+    border: rgb(74, 158, 255) solid 3px;
+    background-color: rgb(238, 238, 238);;
+    padding: 1em;
 }
 
 #creator input { 
@@ -70,5 +100,66 @@ input {
 #Description { 
     height:200px;
     font-size:14pt;
+    border: solid 2px rgb(0, 119, 255);
+    margin-bottom: 1em;
 }
 
+#newBook { 
+    background-color: transparent;
+    border:  rgb(0, 119, 255) solid 2px;
+    color:  rgb(0, 119, 255);
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+#books { 
+    display: flex; 
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 20em;
+    margin-top: 2em;
+}
+
+.showBook { 
+    background-color: blueviolet;
+    width: 19%;
+    height: 20em;
+    margin: 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.bookDescription { 
+    width: 90%;
+    height: auto;
+    overflow-wrap: break-word;
+    text-align: left;
+}
+
+.delete { 
+    background-color: transparent;
+    border: rgb(255, 255, 255) solid 2px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.readBtn{
+    background-color: transparent;
+    border: rgb(255, 255, 255) solid 2px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.unread{
+    background-color: transparent;
+    border: rgb(255, 255, 255) solid 2px;
+    color: rgb(255, 255, 255);
+    font-size: 18px;
+    border-radius: 10px;
+}

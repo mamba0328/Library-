@@ -1,80 +1,80 @@
 //constructor and array in which new books will be stored 
 const booksList = [];
 
-const book = function (name, author, year, pages, description) { 
+class book {
+    constructor (name, author, year, pages, description) { 
     this.name = name; 
     this.author = author; 
     this.year = year; 
     this.pages = pages; 
     this.description = description; 
+    }
+    
+    addBookToList() { //shows books on the page 
+        const showBook = document.createElement('div');
+        showBook.classList.add('showBook');
+    
+        //creates button section and add buttons into it 
+        const buttonSection = document.createElement('div');
+        buttonSection.classList.add('bookButtons'); 
+    
+        const deleteBtn = document.createElement('button'); 
+        deleteBtn.innerText = 'delete';
+        deleteBtn.classList.add('delete');
+    
+        const readBtn = document.createElement('button'); 
+        readBtn.innerText = 'read';
+        readBtn.classList.add('readBtn');
+    
+        buttonSection.appendChild(deleteBtn);
+        buttonSection.appendChild(readBtn);
+        
+    
+        //makes a section for info inside showBook
+        const infoSection = document.createElement('div');
+        infoSection.classList.add('bookInfo');
+    
+        //fills propetries with in input values
+        const bookName = document.createElement('h1');
+        if(this.author){ //different outupts for non mentioned author
+         bookName.innerText = this.name + ' by ' + this.author;
+        } else bookName.innerText = this.name;
+    
+        const bookDescription = document.createElement('p');
+        bookDescription.innerText = this.description;
+        bookDescription.classList.add('bookDescription');
+    
+        const bookYear = document.createElement('p');
+        if (!this.year){ 
+            this.year = 'unknown';
+        }
+        bookYear.innerText = 'Date of publishing: ' + this.year;
+    
+        const bookPages = document.createElement('p');
+        if (!this.pages){ 
+            this.pages = 'unknown';
+        }
+        bookPages.innerText = 'Pages: ' + this.pages;
+    
+    
+        infoSection.appendChild(bookName);
+        infoSection.appendChild(bookDescription);
+        infoSection.appendChild(bookYear);
+        infoSection.appendChild(bookPages);
+    
+        //appends section to book's card and append the card to the list
+        showBook.appendChild(infoSection);
+        showBook.appendChild(buttonSection);
+        booksSection.appendChild(showBook);
+    
+        //makes random blue background 
+        var max = 200;
+        var min = 100;
+        var blue = Math.floor(Math.random() * (max - min + 1)) + min;
+        showBook.style.backgroundColor = "rgb(25," + blue + ",255)"
+    }
 }
 
-//shows books on the page 
-
-book.prototype.addBookToList = function() { 
-    //creates a bookcard
-    const showBook = document.createElement('div');
-    showBook.classList.add('showBook');
-
-    //creates button section and add them into it 
-    const buttonSection = document.createElement('div');
-    buttonSection.classList.add('bookButtons'); 
-
-    const deleteBtn = document.createElement('button'); 
-    deleteBtn.innerText = 'delete';
-    deleteBtn.classList.add('delete');
-
-    const readBtn = document.createElement('button'); 
-    readBtn.innerText = 'read';
-    readBtn.classList.add('readBtn');
-
-    buttonSection.appendChild(deleteBtn);
-    buttonSection.appendChild(readBtn);
-    
-
-    //makes a section for info inside showBook
-    const infoSection = document.createElement('div');
-    infoSection.classList.add('bookInfo');
-
-    //fills propetries with in input values
-    const bookName = document.createElement('h1');
-    if(this.author){ //different outupts for non mentioned author
-     bookName.innerText = this.name + ' by ' + this.author;
-    } else bookName.innerText = this.name;
-
-    const bookDescription = document.createElement('p');
-    bookDescription.innerText = this.description;
-    bookDescription.classList.add('bookDescription');
-
-    const bookYear = document.createElement('p');
-    if (!this.year){ 
-        this.year = 'unknown';
-    }
-    bookYear.innerText = 'Date of publishing: ' + this.year;
-
-    const bookPages = document.createElement('p');
-    if (!this.pages){ 
-        this.pages = 'unknown';
-    }
-    bookPages.innerText = 'Pages: ' + this.pages;
-
-
-    infoSection.appendChild(bookName);
-    infoSection.appendChild(bookDescription);
-    infoSection.appendChild(bookYear);
-    infoSection.appendChild(bookPages);
-
-    //appends section to book's card and append the card to the list
-    showBook.appendChild(infoSection);
-    showBook.appendChild(buttonSection);
-    booksSection.appendChild(showBook);
-
-    //makes random blue background 
-    var max = 200;
-    var min = 100;
-    var blue = Math.floor(Math.random() * (max - min + 1)) + min;
-    showBook.style.backgroundColor = "rgb(25," + blue + ",255)"
-}; 
 
 //add a book to the list 
 const list = document.getElementById('list');
@@ -94,13 +94,28 @@ const pagesInput = document.getElementById('Pages');
 
 newBook.addEventListener('click', () => { //takes inpue values and create a new book
     if (nameInput.value) {
-    const theBook = new book(nameInput.value, authorInput.value, yearInput.value, pagesInput.value, descriptionInput.value)
-    booksList.push(theBook)
-    theBook.addBookToList();
-        //changes values of counters
-        bookCount.textContent = booksList.length - myBad;
+        let sameBook = chekForSameBook(); 
+        if(sameBook === true) {
+            alert('You already added ' + nameInput.value)
+        } else { 
+            const theBook = new book(nameInput.value, authorInput.value, yearInput.value, pagesInput.value, descriptionInput.value)
+            booksList.push(theBook)
+            theBook.addBookToList();
+            //changes values of counters
+            bookCount.textContent = booksList.length;
+        }
+       
     } else alert('You need to enter at least name of the book');
 })
+
+function chekForSameBook(){ //cheks either book has been already created and return true if it's
+    for (i=0;i<booksList.length;i++){
+        if(nameInput.value == booksList[i].name){
+            console.log(nameInput.value + '' + booksList[i].name)
+            return true
+        }
+    }
+}
 
 //add a new book window pops up
 const addBook = document.querySelector('#add')
@@ -120,14 +135,28 @@ function deleteBook(e) {
         if (confirm("Are you sure?")) {
         var key = e.target.parentElement.parentElement;
         booksSection.removeChild(key);
-        myBad +=1; 
-        bookCount.textContent = booksList.length - myBad;
-        //changes values of counters
-       
-     }
-    }
-}
 
+        //changes values of book counter
+        
+        let cardName = e.target.parentElement.parentElement.firstChild.firstChild.textContent;//finds name of the card to find later similar in the list to be deleted
+
+        for(i=0; i<booksList.length; i++){//finds the match and removes it from array
+            console.log(booksList.length)
+            if(cardName === booksList[i].name){
+             booksList.splice(i,1);
+             console.log(booksList.length)
+            }
+        }
+
+        bookCount.textContent = booksList.length;
+
+        let readList = booksList.filter(obj => obj.read == 1)
+         readCount.textContent = readList.length;
+    }
+
+    
+ }
+} 
 booksSection.addEventListener('click', readBook)
 
 function readBook(e) { 
@@ -145,9 +174,15 @@ function readBook(e) {
         e.target.innerText = 'unread';
 
         e.target.classList.add('unread');
-        //changes books readed count
-        booksReaded += 1; 
-        readCount.textContent = booksReaded;
+      
+        //count how many books readed
+        let cardName = e.target.parentElement.parentElement.firstChild.firstChild.textContent;//finds name of the card to find later similar in the list
+
+        for(i=0; i<booksList.length; i++){//finds the match and add read property to it  
+            if(cardName === booksList[i].name){
+             booksList[i].read = 1; 
+            }
+        }
 
     } else if (e.target.classList.contains('unread')){
         var max = 200;
@@ -160,11 +195,24 @@ function readBook(e) {
         e.target.innerText = 'read';
 
         e.target.classList.add('readBtn');
-        //changes books readed count
-        booksReaded -= 1; 
-        readCount.textContent = booksReaded;
+
+        
+
+        let cardName = e.target.parentElement.parentElement.firstChild.firstChild.textContent;
+
+        for(i=0; i<booksList.length; i++){//finds the match and add read property to it  
+            if(cardName === booksList[i].name){
+             booksList[i].read = 0; 
+            }
+        }
     }
+
+    //changes counters value
+    let readList = booksList.filter(obj => obj.read == 1)
+    readCount.textContent = readList.length;
+    
 }
+
 //changes color of button when mouseover
 addBook.addEventListener('mouseover', changeColor)
 
@@ -194,7 +242,6 @@ booksSection.addEventListener('mouseout', function (e) {
 })
 
 
-
 booksSection.addEventListener('mouseover', function (e) { 
     if (e.target.classList.contains('unread')) { 
         changeColor(e);
@@ -215,10 +262,6 @@ booksSection.addEventListener('mouseout', function (e) {
     }
 })
 
-booksSection.addEventListener('click', (e) => { 
-    console.log(e.target.classList)
-})
-
 function changeColor(e) { 
     e.target.style.border = '2px solid blueviolet';
     e.target.style.color = 'blueviolet';
@@ -230,9 +273,25 @@ function changeColorBack(e) {
 }
 
 
-
-
-
 //filter books 
 const filter = document.getElementById('filter');
+const books = booksSection.children;
 
+
+filter.addEventListener('keyup', filterBooks);
+
+function filterBooks(e) { 
+
+    let inputValue = e.target.value.toLowerCase();
+    let booksArrayed = Array.from(books);
+    console.log(inputValue)
+    booksArrayed.forEach(function(key) { 
+        let keyName = key.firstChild.firstChild.textContent;
+
+        if (keyName.toLowerCase().indexOf(inputValue) != -1) { 
+            key.style.display = 'flex';
+        } else { 
+            key.style.display = 'none';
+        }
+    })
+}
